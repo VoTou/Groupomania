@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "./uploads/profil/random-user.png"
     },
-    bio :{
-      type: String,
-      max: 1024,
-    },
+    // bio :{
+    //   type: String,
+    //   max: 1024,
+    // },
   },
   {
     timestamps: true,
