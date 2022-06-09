@@ -2,7 +2,6 @@ const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectID = require("mongoose").Types.ObjectId;
 
-
 //========== Routes pour la gestions des posts ============//
 // Création d'un post
 module.exports.createPost = async (req, res) => {
@@ -155,7 +154,6 @@ module.exports.commentPost = (req, res) => {
   }
 };
 
-
 module.exports.editCommentPost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -180,5 +178,26 @@ module.exports.editCommentPost = (req, res) => {
 };
 
 module.exports.deleteCommentPost = (req, res) => {
-  
-}
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+  try {
+    return PostModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {
+          comments: {
+            _id: req.body.commentId,
+          },
+        },
+      },
+      { new: true },
+      (err, docs) => {
+        if (!err) return res.send(docs);
+        else return res.status(400).send(err);
+      }
+    );
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
