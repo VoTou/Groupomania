@@ -2,6 +2,8 @@ const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectID = require("mongoose").Types.ObjectId;
 
+
+//========== Routes pour la gestions des posts ============//
 // Création d'un post
 module.exports.createPost = async (req, res) => {
   const newPost = new PostModel({
@@ -59,7 +61,7 @@ module.exports.deletePost = (req, res) => {
   });
 };
 
-//Like d'un post
+// Like d'un post
 module.exports.likePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -91,6 +93,7 @@ module.exports.likePost = async (req, res) => {
   }
 };
 
+// Retirer le like d'un post
 module.exports.unlikePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -121,3 +124,42 @@ module.exports.unlikePost = async (req, res) => {
     return res.status(400).send(err);
   }
 };
+
+//========== Routes pour la gestions des commentaires ============//
+
+module.exports.commentPost = (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+  try {
+    return PostModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {
+          comments: {
+            commenterId: req.body.commenterId,
+            commenterPseudo: req.body.commenterPseudo,
+            text: req.body.text,
+            timestamp: new Date().getTime(),
+          },
+        },
+      },
+      { new: true },
+      (err, docs) => {
+        if (!err) return res.send(docs);
+        else return res.status(400).send(err);
+      }
+    );
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
+
+
+module.exports.editCommentPost = (req, res) => {
+
+}
+
+module.exports.deleteCommentPost = (req, res) => {
+
+}
