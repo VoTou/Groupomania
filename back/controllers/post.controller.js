@@ -30,7 +30,7 @@ module.exports.readPost = (req, res) => {
 
 // Mise à jour d'un post
 module.exports.updatePost = (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
+  if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
   const updatedRecord = {
@@ -48,8 +48,13 @@ module.exports.updatePost = (req, res) => {
   );
 };
 
-
 // Suppression d'un post
 module.exports.deletePost = (req, res) => {
-    
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+  PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
+    if (!err) res.send(docs);
+    else console.log("Delete error : " + err);
+  });
 };
