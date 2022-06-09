@@ -18,10 +18,10 @@ module.exports.getAllUsers = async (req, res) => {
     }).select("-password");
   };
 
-  // Mise à jour de la bio utilisateur
+  //Mise à jour de la bio utilisateur
   module.exports.updateUser = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
-      return res.status(400).send("ID invalid : " + req.params.id);
+      return res.status(400).send("ID unknown : " + req.params.id);
   
     try {
       await UserModel.findOneAndUpdate(
@@ -31,12 +31,14 @@ module.exports.getAllUsers = async (req, res) => {
             bio: req.body.bio,
           },
         },
-        { new: true, upsert: true, setDefaultsOnInsert: true }
-      )
-        .then((docs) => res.send(docs))
-        .catch((err) => res.status(500).send({ message: err }));
+        { new: true, upsert: true, setDefaultsOnInsert: true },
+        (err, docs) => {
+          if (!err) return res.send(docs);
+          if (err) return res.status(500).send({ message: err });
+        }
+      ).clone();
     } catch (err) {
-      res.status(500).json({ message: err });
+      return res.status(500).json({ message: err });
     }
   };
 
