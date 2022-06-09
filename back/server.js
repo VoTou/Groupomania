@@ -7,6 +7,7 @@ require("./config/db");
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const app = express();
 
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -18,7 +19,7 @@ app.get("/jwtid", requireAuth, (req, res) => {
 
 // routes
 app.use("/api/user", userRoutes);
-app.use('api/post', postRoutes)
+app.use('/api/post', postRoutes)
 
 // server
 app.listen(process.env.PORT, () => {
