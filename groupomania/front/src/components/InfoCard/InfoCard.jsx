@@ -9,6 +9,7 @@ const InfoCard = () => {
         <h4>Your Info</h4>
         <div>
           <UilPen width="2rem" height="1.2rem" />
+          
         </div>
       </div>
 
