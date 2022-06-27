@@ -3,8 +3,6 @@ import ProfileImage from "../../img/profileImg.jpg";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
-import { UilLocationPoint } from "@iconscout/react-unicons";
-import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 
 const PostShare = () => {
@@ -35,15 +33,7 @@ const PostShare = () => {
             <UilPlayCircle />
             Video
           </div>
-          <div className="option" style={{ color: "var(--location)" }}>
-            <UilLocationPoint />
-            Location
-          </div>
-          <div className="option" style={{ color: "var(--shedule)" }}>
-            <UilSchedule />
-            Shedule
-          </div>
-          <button className="button ps-button">Share</button>
+          <button className="button ps-button">Partager</button>
           <div style={{display: 'none'}}>
             <input type="file" name="myImage" ref={imageRef} onChange={onImageChange}/>
           </div>
