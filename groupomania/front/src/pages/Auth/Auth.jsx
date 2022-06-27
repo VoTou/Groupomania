@@ -21,14 +21,14 @@ function LogIn() {
   return (
     <div className="a-right">
       <form className="infoForm authForm">
-        <h3>Log In</h3>
+        <h3>Connexion</h3>
 
         <div>
           <input
-            type="text"
-            placeholder="Username"
+            type="email"
+            placeholder="Votre adresse e-mail"
             className="infoInput"
-            name="username"
+            name="email"
           />
         </div>
 
@@ -43,9 +43,9 @@ function LogIn() {
 
         <div>
           <span style={{ fontSize: "12px" }}>
-            Don't have an account Sign up
+            Créer un nouveau compte
           </span>
-          <button className="button infoButton">Login</button>
+          <button className="button infoButton">Se connecter</button>
         </div>
       </form>
     </div>
@@ -56,27 +56,21 @@ function SignUp() {
   return (
     <div className="a-right">
       <form className="infoForm authForm">
-        <h3>Sign up</h3>
+        <h3>Inscription</h3>
 
         <div>
           <input
-            type="text"
-            placeholder="First Name"
+            type="email"
+            placeholder="Votre adresse e-mail"
             className="infoInput"
-            name="firstname"
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            className="infoInput"
-            name="lastname"
+            name="email"
           />
         </div>
         <div>
           <input
             type="text"
             className="infoInput"
-            placeholder="Username"
+            placeholder="Votre nom d'utilisateur"
             name="username"
           />
         </div>
@@ -86,22 +80,22 @@ function SignUp() {
             type="text"
             className="infoInput"
             name="password"
-            placeholder="Password"
+            placeholder="Mot de passe"
           />
           <input
             type="text"
             className="infoInput"
             name="confirmpassword"
-            placeholder="Confirm Password"
+            placeholder="Confirmation du mot de passe"
           />
         </div>
         <div>
           <span style={{ fontSize: "13px" }}>
-            Already have an account. Login !
+            Vous avez déjà un compte ? Se connecter !
           </span>
         </div>
         <button className="button infoButton" type="submit">
-          Signup
+          S'inscrire
         </button>
       </form>
     </div>
