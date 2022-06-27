@@ -80,14 +80,14 @@
 }
 
 .verticalLign {
-    height: 150%;
-    border-left: 2px solid var(--hrColor);
+  height: 150%;
+  border-left: 2px solid var(--hrColor);
 }
 
 .ProfileCard > span {
-    font-weight: bold;
-    color: var(--primaire);
-    align-self: center;
-    margin-bottom: 1rem;
-    cursor: pointer;
+  font-weight: bold;
+  color: var(--primaire);
+  align-self: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
 }
