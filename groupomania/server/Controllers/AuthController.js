@@ -1,5 +1,6 @@
 import UserModel from "../Models/userModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // Enregistrement d'un nouvel utilisateur
 export const registerUser = async (req, res) => {
@@ -13,19 +14,25 @@ export const registerUser = async (req, res) => {
     const oldUser = await UserModel.findOne({ email });
 
     if (oldUser) {
-      return res
-        .status(400)
-        .json({ message: "Email is already registered !" });
+      return res.status(400).json({ message: "Email is already registered !" });
     }
-    await newUser.save();
-    res.status(200).json(newUser);
+    const user = await newUser.save();
+
+    const token = jwt.sign(
+      {
+        username: user.username,
+        id: user._id,
+      },
+      process.env.JWT_KEY,
+      { expiresIn: "12h" }
+    );
+    res.status(200).json({ user, token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
 // Connexion utilisateur
-
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -35,9 +42,19 @@ export const loginUser = async (req, res) => {
     if (user) {
       const validity = await bcrypt.compare(password, user.password);
 
-      validity
-        ? res.status(200).json(user)
-        : res.status(400).json("Wrong password");
+      if (!validity) {
+        res.status(400).json("Wrong password");
+      } else {
+        const token = jwt.sign(
+          {
+            username: user.username,
+            id: user._id,
+          },
+          process.env.JWT_KEY,
+          { expiresIn: "12h" }
+        );
+        res.status(200).json({ user, token });
+      }
     } else {
       res.status(404).json("User does not exists");
     }
