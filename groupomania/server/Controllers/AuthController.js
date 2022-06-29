@@ -3,14 +3,20 @@ import bcrypt from "bcrypt";
 
 // Enregistrement d'un nouvel utilisateur
 export const registerUser = async (req, res) => {
-  const { email, username, password } = req.body;
-
   const salt = await bcrypt.genSalt(10);
-  const hashedPass = await bcrypt.hash(password, salt);
-
-  const newUser = new UserModel({ email, username, password: hashedPass });
+  const hashedPass = await bcrypt.hash(req.body.password, salt);
+  req.body.password = hashedPass;
+  const newUser = new UserModel(req.body);
+  const { email } = req.body;
 
   try {
+    const oldUser = await UserModel.findOne({ email });
+
+    if (oldUser) {
+      return res
+        .status(400)
+        .json({ message: "Email is already registered !" });
+    }
     await newUser.save();
     res.status(200).json(newUser);
   } catch (error) {
@@ -37,6 +43,5 @@ export const loginUser = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
-
   }
 };

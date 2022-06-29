@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./Auth.css";
 import Logo from "../../img/logo.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn, signUp } from "../../action/AuthAction";
 
 const Auth = () => {
-  const [isSignUp, setIsSignUp] = useState(true);
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.authReducer.loading);
+  const [isSignUp, setIsSignUp] = useState(true);
   const [data, setData] = useState({
     username: "",
     email: "",
@@ -119,8 +120,8 @@ const Auth = () => {
                 : "Créer un nouveau compte"}
             </span>
           </div>
-          <button className="button infoButton" type="submit">
-            {isSignUp ? "Inscription" : "Connexion"}
+          <button className="button infoButton" type="submit" disabled={loading}>
+            {loading ? "Loading..." : isSignUp ? "Inscription" : "Connexion"}
           </button>
         </form>
       </div>
