@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import ProfileImage from "../../img/profileImg.jpg";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
-import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, uploadPost } from "../../action/uploadAction";
@@ -62,10 +61,6 @@ const PostShare = () => {
           >
             <UilScenery />
             Photo
-          </div>
-          <div className="option" style={{ color: "var(--video)" }}>
-            <UilPlayCircle />
-            Vidéo
           </div>
           <button
             className="button ps-button"

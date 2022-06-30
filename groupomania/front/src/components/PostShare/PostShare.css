@@ -30,7 +30,7 @@
 
 .postOptions {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 
 .option {
@@ -38,6 +38,7 @@
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 10px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
