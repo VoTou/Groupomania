@@ -9,7 +9,7 @@ const ProfileSide = () => {
   return (
     <div className="ProfileSide">
       <LogoGroupomania />
-      <ProfileCard />
+      <ProfileCard location = "homepage"/>
       <FollowersCard />
     </div>
   );
