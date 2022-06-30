@@ -1,5 +1,6 @@
 import UserModel from "../Models/userModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // Récupération d'un utilisateur
 export const getUser = async (req, res) => {
@@ -21,9 +22,9 @@ export const getUser = async (req, res) => {
 // Mise à jour de l'utilisateur
 export const updateUser = async (req, res) => {
   const id = req.params.id;
-  const { currentUserId, currentUserAdminStatus, password } = req.body;
+  const { _id, currentUserAdminStatus, password } = req.body;
 
-  if (id === currentUserId || currentUserAdminStatus) {
+  if (id === _id) {
     try {
       if (password) {
         const salt = await bcrypt.genSalt(10);
@@ -34,12 +35,17 @@ export const updateUser = async (req, res) => {
         new: true,
       });
 
-      res.status(200).json(user);
+      const token = jwt.sign(
+        { username: user.username, id: user._id },
+        process.env.JWT_KEY,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({user, token});
     } catch (error) {
       res.status(500).json(error);
     }
   } else {
-    res.status(403).json("Acces Denied ! You can only update your own profile");
+    res.status(403).json("Access Denied ! You can only update your own profile");
   }
 };
 
@@ -57,7 +63,7 @@ export const deleteUser = async (req, res) => {
       res.status(500).json(error);
     }
   else {
-    res.status(403).json("Acces Denied ! You can only delete your own profile");
+    res.status(403).json("Access Denied ! You can only delete your own profile");
   }
 };
 
@@ -86,25 +92,25 @@ export const followUser = async (req, res) => {
 };
 
 // Arrêter de suivre un utilisateur
-export const UnFollowUser = async (req, res) => {
-    const id = req.params.id;
-    const { currentUserId } = req.body;
-    if (currentUserId === id) {
-      res.status(403).json("Action forbidden");
-    } else {
-      try {
-        const followUser = await UserModel.findById(id);
-        const followingUser = await UserModel.findById(currentUserId);
-  
-        if (followUser.followers.includes(currentUserId)) {
-          await followUser.updateOne({ $pull: { followers: currentUserId } });
-          await followingUser.updateOne({ $pull: { followings: id } });
-          res.status(200).json("User unfollowed !");
-        } else {
-          res.status(403).json("User is not followed by you");
-        }
-      } catch (error) {
-        res.status(500).json(error);
+export const unFollowUser = async (req, res) => {
+  const id = req.params.id;
+  const { currentUserId } = req.body;
+  if (currentUserId === id) {
+    res.status(403).json("Action forbidden");
+  } else {
+    try {
+      const followUser = await UserModel.findById(id);
+      const followingUser = await UserModel.findById(currentUserId);
+
+      if (followUser.followers.includes(currentUserId)) {
+        await followUser.updateOne({ $pull: { followers: currentUserId } });
+        await followingUser.updateOne({ $pull: { followings: id } });
+        res.status(200).json("User unfollowed !");
+      } else {
+        res.status(403).json("User is not followed by you");
       }
+    } catch (error) {
+      res.status(500).json(error);
     }
-  };
+  }
+};

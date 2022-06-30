@@ -1,10 +1,9 @@
 import React, { useState, useRef } from "react";
-import ProfileImage from "../../img/profileImg.jpg";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadImage, uploadPost } from "../../action/uploadAction";
+import { uploadImage, uploadPost } from "../../actions/UploadAction";
 
 const PostShare = () => {
   const loading = useSelector((state) => state.postReducer.uploading);

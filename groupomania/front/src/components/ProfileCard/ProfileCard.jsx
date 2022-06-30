@@ -28,7 +28,7 @@ const ProfileCard = ({location}) => {
       </div>
       <div className="ProfileName">
         <span>{user.username}</span>
-        <span>{user.worksAt ? user.worksAt : "Indiquez votre métier"}</span>
+        <span>{user.worksAt ? user.worksAt : ""}</span>
       </div>
       <div className="followStatus">
         <hr />

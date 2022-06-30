@@ -4,7 +4,6 @@ const UserSchema = mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
       trim: true,
     },
     password: {
@@ -22,6 +21,8 @@ const UserSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    firstname: String,
+    lastname: String,
     profilePicture: String,
     coverPicture: String,
     about: String,
