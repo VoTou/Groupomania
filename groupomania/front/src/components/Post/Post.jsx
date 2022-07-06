@@ -56,13 +56,13 @@ const Post = ({ data }) => {
           {isUpdated === false && <p>{data.desc}</p>}
           {isUpdated && (
             <div>
-              <textarea cols="25" rows="5"
+              <textarea cols="31" rows="5"
                 defaultValue={data.desc}
                 onChange={(e) => setTextUpdate(e.target.value)}
               />
               <div>
                 <button className="btn" onClick={updateItem}>
-                  Valider modification
+                  Valider les modifications
                 </button>
               </div>
             </div>

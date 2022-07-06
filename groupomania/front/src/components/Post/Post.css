@@ -20,13 +20,13 @@
   gap: 1rem;
 }
 
-.modify{
+.modify {
   cursor: pointer;
   margin-left: -4px;
   margin-bottom: 5px;
 }
 
-.desc-button{
+.desc-button {
   display: flex;
   justify-content: space-between;
 }
