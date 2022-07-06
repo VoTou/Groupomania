@@ -55,12 +55,12 @@ const Post = ({ data }) => {
         <div className="desc-button">
           {isUpdated === false && <p>{data.desc}</p>}
           {isUpdated && (
-            <div className="update-post">
-              <textarea
+            <div>
+              <textarea cols="25" rows="5"
                 defaultValue={data.desc}
                 onChange={(e) => setTextUpdate(e.target.value)}
               />
-              <div className="button-containerr">
+              <div>
                 <button className="btn" onClick={updateItem}>
                   Valider modification
                 </button>
@@ -68,7 +68,7 @@ const Post = ({ data }) => {
             </div>
           )}
           {user._id === data.userId && (
-            <div className="button-container">
+            <div>
               <div onClick={() => setIsUpdated(!isUpdated)}>
                 <UilPen className="modify" width="2rem" height="1.5rem" />
               </div>
