@@ -76,10 +76,21 @@
 @media screen and (max-width: 920px) {
   .Auth {
     flex-direction: column;
-    justify-content: stretch;
+    justify-content: flex-start;
   }
   .a-left {
     margin-right: 10px;
-
+    
   }
+  .authForm {
+    max-width: 355px;
+    margin: -50px auto;
+  }
+  .infoInput {
+    padding: 20px;
+  }
+  .infoSize{
+    width: 125px;
+  }
+  
 }

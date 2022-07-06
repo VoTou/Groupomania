@@ -9,9 +9,6 @@
   --buttonBg: #fd2d01;
   --inputColor: rgba(40, 52, 62, 0.07);
   --photo: #4cb256;
-  --video: #4a4eb7;
-  --location: #ef5757;
-  --shedule: #e1ae4a;
 }
 
 #root {
@@ -52,4 +49,14 @@
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (max-width: 920px) {
+  .App{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      max-width: 600px;
+      align-items: center;
+  }
 }

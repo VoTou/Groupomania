@@ -40,3 +40,30 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.UnfollowButton{
+  color: var(--primaire);
+  border: 2px solid var(--primaire);
+  cursor: pointer;
+  background: transparent;
+}
+
+
+.FollowersCard>span{
+  font-weight: bold;
+  color: var(--primaire);
+  align-self: center;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 920px) {
+  .follower{
+      justify-content: center;
+  }
+  .fc-button{
+    margin-left: 100px;
+  }
+  h3{
+    margin: 0 auto;
+  }
+}

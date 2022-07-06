@@ -78,7 +78,7 @@ const Auth = () => {
             <input
               required
               type="password"
-              className="infoInput"
+              className="infoInput infoSize"
               name="password"
               placeholder="Mot de passe"
               onChange={handleChange}
@@ -88,7 +88,7 @@ const Auth = () => {
               <input
                 required
                 type="password"
-                className="infoInput"
+                className="infoInput infoSize"
                 name="confirmPass"
                 placeholder="Confirmation du mot de passe"
                 onChange={handleChange}
@@ -120,7 +120,11 @@ const Auth = () => {
                 : "Créer un nouveau compte"}
             </span>
           </div>
-          <button className="button infoButton" type="submit" disabled={loading}>
+          <button
+            className="button infoButton"
+            type="submit"
+            disabled={loading}
+          >
             {loading ? "Loading..." : isSignUp ? "Inscription" : "Connexion"}
           </button>
         </form>

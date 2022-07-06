@@ -54,14 +54,27 @@ const InfoCard = () => {
 
       <div className="info">
         <span>
-          <b>Lieu de résidence</b>
+          <b>Nom: </b>
+        </span>
+        <span> {profileUser.lastname}</span>
+      </div>
+      <div className="info">
+        <span>
+          <b>Prénom: </b>
+        </span>
+        <span> {profileUser.firstname}</span>
+      </div>
+      
+      <div className="info">
+        <span>
+          <b>Lieu de résidence: </b>
         </span>
         <span> {profileUser.livesin}</span>
       </div>
 
       <div className="info">
         <span>
-          <b>Métier</b>
+          <b>Métier: </b>
         </span>
         <span>{profileUser.worksAt}</span>
       </div>

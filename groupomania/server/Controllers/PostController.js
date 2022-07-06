@@ -67,24 +67,23 @@ export const likePost = async (req, res) => {
   const { userId } = req.body;
   try {
     const post = await PostModel.findById(id);
-    if (!post.likes.includes(userId)) {
-      await post.updateOne({ $push: { likes: userId } });
-      res.status(200).json("Post liked !");
-    } else {
+    if (post.likes.includes(userId)) {
       await post.updateOne({ $pull: { likes: userId } });
-      res.status(200).json("Post unliked !");
+      res.status(200).json("Post disliked");
+    } else {
+      await post.updateOne({ $push: { likes: userId } });
+      res.status(200).json("Post liked");
     }
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
-// Chronologie des posts
+// Obtention des posts
 export const getTimelinePosts = async (req, res) => {
   const userId = req.params.id;
   try {
     const currentUserPosts = await PostModel.find({ userId: userId });
-
     const followingPosts = await UserModel.aggregate([
       {
         $match: {
@@ -94,7 +93,7 @@ export const getTimelinePosts = async (req, res) => {
       {
         $lookup: {
           from: "posts",
-          localField: "following",
+          localField: "followings",
           foreignField: "userId",
           as: "followingPosts",
         },

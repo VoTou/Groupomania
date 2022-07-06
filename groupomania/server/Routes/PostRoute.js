@@ -7,6 +7,7 @@ import {
   likePost,
   updatePost,
 } from "../Controllers/PostController.js";
+
 const router = express.Router();
 
 router.post("/", createPost);

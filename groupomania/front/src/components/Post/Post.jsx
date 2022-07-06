@@ -1,22 +1,33 @@
 import React, { useState } from "react";
 import "./Post.css";
-import Comment from "../../img/comment.png";
 import Heart from "../../img/like.png";
 import NotLike from "../../img/notlike.png";
 import { likePost } from "../../api/PostRequest";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import DeleteCard from "../DeleteCard/DeleteCard";
+import { updatePost } from "../../actions/PostAction";
+import { UilPen } from "@iconscout/react-unicons";
 
 const Post = ({ data }) => {
   const { user } = useSelector((state) => state.authReducer.authData);
-
   const [liked, setLiked] = useState(data.likes.includes(user._id));
   const [likes, setLikes] = useState(data.likes.length);
+  const [isUpdated, setIsUpdated] = useState(false);
+  const [textUpdate, setTextUpdate] = useState(null);
+  const dispatch = useDispatch();
 
   const handleLike = () => {
-    setLiked((prev) => !prev);
     likePost(data._id, user._id);
-    liked ? setLikes((prev) => prev -1) : setLikes((prev) => prev + 1);
+    setLiked((prev) => !prev);
+    liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
   };
+  const updateItem = () => {
+    if (textUpdate) {
+      dispatch(updatePost(data._id, textUpdate));
+    }
+    setIsUpdated(false);
+  };
+
   return (
     <div className="Post">
       <img
@@ -30,19 +41,41 @@ const Post = ({ data }) => {
           alt=""
           style={{ cursor: "pointer" }}
           onClick={handleLike}
-        />
-        <img src={Comment} alt="" />
+        />{" "}
       </div>
 
-      <span style={{ color: "var(--gray)", fontSize: "12px" }}>
-        {likes} Likes
+      <span style={{ color: "var(--gray)", fontSize: "14px" }}>
+        {likes} likes
       </span>
-
       <div className="detail">
         <span>
-          <b>{data.name}</b>
+          <b>{data.username} </b>
         </span>
-        <span> {data.desc}</span>
+        {/* Edition du post */}
+        <div className="desc-button">
+          {isUpdated === false && <p>{data.desc}</p>}
+          {isUpdated && (
+            <div className="update-post">
+              <textarea
+                defaultValue={data.desc}
+                onChange={(e) => setTextUpdate(e.target.value)}
+              />
+              <div className="button-containerr">
+                <button className="btn" onClick={updateItem}>
+                  Valider modification
+                </button>
+              </div>
+            </div>
+          )}
+          {user._id === data.userId && (
+            <div className="button-container">
+              <div onClick={() => setIsUpdated(!isUpdated)}>
+                <UilPen className="modify" width="2rem" height="1.5rem" />
+              </div>
+              <DeleteCard id={data._id} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

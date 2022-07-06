@@ -92,3 +92,15 @@
   margin-bottom: 1rem;
   cursor: pointer;
 }
+
+@media screen and (max-width: 920px) {
+  .ProfileImages > img:nth-of-type(1){
+      max-height: 300px;
+  }
+  .ProfileCard {
+    gap: 0.2rem;
+  }
+  .followStatus {
+    gap: 0.2rem;
+  }
+}

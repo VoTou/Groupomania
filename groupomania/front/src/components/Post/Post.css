@@ -4,7 +4,7 @@
   padding: 1rem;
   background-color: var(--cardColor);
   border-radius: 1rem;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .Post > img {
@@ -16,6 +16,17 @@
 
 .postReact {
   display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.modify{
+  cursor: pointer;
+  margin-left: -4px;
+  margin-bottom: 5px;
+}
+
+.desc-button{
+  display: flex;
+  justify-content: space-between;
 }

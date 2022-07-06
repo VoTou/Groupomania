@@ -1,6 +1,15 @@
 .Home{
     position: relative;
     display: grid;
-    grid-template-columns: 23rem auto 10rem;
+    grid-template-columns: 22.5rem auto 2rem;
     gap: 1rem;
+}
+
+@media screen and (max-width: 920px) {
+    .Home{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
 }
