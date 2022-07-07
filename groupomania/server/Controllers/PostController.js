@@ -5,7 +5,6 @@ import UserModel from "../Models/userModel.js";
 // Création d'un nouveau post
 export const createPost = async (req, res) => {
   const newPost = new PostModel(req.body);
-
   try {
     await newPost.save();
     res.status(200).json(newPost);
@@ -29,7 +28,6 @@ export const getPost = async (req, res) => {
 export const updatePost = async (req, res) => {
   const postId = req.params.id;
   const { userId } = req.body;
-
   try {
     const post = await PostModel.findById(postId);
     if (post.userId === userId) {
@@ -39,6 +37,7 @@ export const updatePost = async (req, res) => {
       res.status(403).json("Action forbidden !");
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -46,7 +45,7 @@ export const updatePost = async (req, res) => {
 // Supprimer un post
 export const deletePost = async (req, res) => {
   const id = req.params.id;
-  const { userId } = req.body;
+  const { userId } = req.auth;
 
   try {
     const post = await PostModel.findById(id);

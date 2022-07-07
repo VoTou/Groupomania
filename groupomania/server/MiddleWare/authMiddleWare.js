@@ -2,14 +2,14 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-const secret = process.env.JWT_KEY;
 const authMiddleWare = async (req, res, next) => {
-  try {
+ try { console.log(req.headers.authorization);
+    console.log("text");
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, secret);
+    const decodedToken = jwt.verify(token, process.env.JWT_KEY);
     const userId = decodedToken.userId;
     req.auth = { userId };  
-    if (req.body.userId && req.body.userId !== userId) {
+    if (req.auth.userId && req.auth.userId !== userId) {
       throw 'Invalid user ID';
     } 
     next();

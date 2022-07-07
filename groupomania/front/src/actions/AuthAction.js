@@ -1,5 +1,6 @@
 import * as AuthApi from "../api/AuthRequest";
 
+// Connexion d'un utilisateur
 export const logIn = (formData) => async (dispatch) => {
   dispatch({ type: "AUTH_START" });
   try {
@@ -11,6 +12,7 @@ export const logIn = (formData) => async (dispatch) => {
   }
 };
 
+// Inscription d'un utilisateur
 export const signUp = (formData) => async (dispatch) => {
   dispatch({ type: "AUTH_START" });
   try {
@@ -22,6 +24,7 @@ export const signUp = (formData) => async (dispatch) => {
   }
 };
 
+// Déconnexion d'un utilisateur
 export const logOut = () => async (dispatch) => {
   dispatch({ type: "LOG_OUT" });
 };

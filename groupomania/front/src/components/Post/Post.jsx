@@ -23,11 +23,11 @@ const Post = ({ data }) => {
   };
   const updateItem = () => {
     if (textUpdate) {
-      dispatch(updatePost(data._id, textUpdate));
+      dispatch(updatePost(data._id, textUpdate, user._id));
     }
     setIsUpdated(false);
   };
-
+  
   return (
     <div className="Post">
       <img
@@ -42,6 +42,7 @@ const Post = ({ data }) => {
           style={{ cursor: "pointer" }}
           onClick={handleLike}
         />{" "}
+        
       </div>
 
       <span style={{ color: "var(--gray)", fontSize: "14px" }}>
@@ -49,7 +50,7 @@ const Post = ({ data }) => {
       </span>
       <div className="detail">
         <span>
-          <b>{data.username} </b>
+          <b>{data.name}</b>
         </span>
         {/* Edition du post */}
         <div className="desc-button">
@@ -67,7 +68,7 @@ const Post = ({ data }) => {
               </div>
             </div>
           )}
-          {user._id === data.userId && (
+          {(user._id === data.userId || user.isAdmin === true) && (
             <div>
               <div onClick={() => setIsUpdated(!isUpdated)}>
                 <UilPen className="modify" width="2rem" height="1.5rem" />
