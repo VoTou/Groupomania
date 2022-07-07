@@ -20,7 +20,8 @@ const FollowersCard = () => {
       <h3>Vous les connaissez peut-être...</h3>
 
       {persons.map((person, id) => {
-        if (person._id !== user._id) return <User person={person} key={id} />;
+        if (person._id !== user._id && person.isAdmin !== true)
+          return <User person={person} key={id} />;
       })}
     </div>
   );
