@@ -1,7 +1,7 @@
 import { DELETE_POST, UPDATE_POST } from "../actions/PostAction";
 
 const postReducer = (
-  state = { posts: null, loading: false, error: false, uploading: false, desc: null },
+  state = { posts: [], loading: false, error: false, uploading: false },
   action
 ) => {
   switch (action.type) {
@@ -25,20 +25,18 @@ const postReducer = (
 
     case "RETREIVING_FAIL":
       return { ...state, loading: false, error: true };
-
     case UPDATE_POST:
-     console.log(state); return state.map((posts) => {
-        if (posts._id === action.data._id) {
+      return state.posts.map((post) => {
+        if (post._id === action.data._id) {
           return {
-            ...posts,
+            ...post,
             desc: action.data.desc,
           };
-        } else 
-        return posts;
+        } else return post;
       });
-      
     case DELETE_POST:
-      return state.filter((posts) => posts._id !== action.data._id);
+      return state.posts.filter((post) => post._id !== action.payload);
+
     default:
       return state;
   }
