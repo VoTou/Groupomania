@@ -16,6 +16,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    e.preventDefault();
   };
 
   const onImageChange = (event) => {
@@ -75,19 +76,19 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
         <h3>Informations</h3>
         <div>
           <input
-            value={formData.firstname}
-            onChange={handleChange}
-            type="text"
-            placeholder="Prénom"
-            name="firstname"
-            className="infoInput"
-          />
-          <input
             value={formData.lastname}
             onChange={handleChange}
             type="text"
             placeholder="Nom"
             name="lastname"
+            className="infoInput"
+          />
+          <input
+            value={formData.firstname}
+            onChange={handleChange}
+            type="text"
+            placeholder="Prénom"
+            name="firstname"
             className="infoInput"
           />
         </div>
@@ -112,7 +113,6 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
             name="livesin"
             className="infoInput"
           />
-          
         </div>
 
         <div>
