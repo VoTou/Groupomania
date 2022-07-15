@@ -14,6 +14,7 @@ const User = ({ person }) => {
       ? dispatch(unfollowUser(person._id, user))
       : dispatch(followUser(person._id, user));
     setFollowing((prev) => !prev);
+    window.location.reload();
   };
   return (
     <div className="follower">
