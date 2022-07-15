@@ -3,9 +3,11 @@
 ## MERN Stack
 ### React / Express / MongoDB / Redux
 
-Démarrer le server : `cd server` + `npm start`
 
-Démarrer le front : `cd front` + `npm start`
+
+Démarrer le server : `cd server` + `npm install` + `npm start`
+
+Démarrer le front : `cd front` + `npm install` + `npm start`
 
 _____________________________
 
