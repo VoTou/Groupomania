@@ -21,13 +21,15 @@ const Post = ({ data }) => {
     setLiked((prev) => !prev);
     liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
   };
+
   const updateItem = () => {
     if (textUpdate) {
       dispatch(updatePost(data._id, textUpdate, user._id));
     }
     setIsUpdated(false);
+    window.location.reload();
   };
-  
+
   return (
     <div className="Post">
       <img
@@ -41,8 +43,7 @@ const Post = ({ data }) => {
           alt=""
           style={{ cursor: "pointer" }}
           onClick={handleLike}
-        />{" "}
-        
+        />
       </div>
 
       <span style={{ color: "var(--gray)", fontSize: "14px" }}>
@@ -50,14 +51,16 @@ const Post = ({ data }) => {
       </span>
       <div className="detail">
         <span>
-          <b>{data.name}</b>
+          <b>{data.posterName}</b>
         </span>
         {/* Edition du post */}
         <div className="desc-button">
           {isUpdated === false && <p>{data.desc}</p>}
           {isUpdated && (
             <div>
-              <textarea cols="31" rows="5"
+              <textarea
+                cols="31"
+                rows="5"
                 defaultValue={data.desc}
                 onChange={(e) => setTextUpdate(e.target.value)}
               />

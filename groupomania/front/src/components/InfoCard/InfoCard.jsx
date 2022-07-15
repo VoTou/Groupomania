@@ -15,9 +15,9 @@ const InfoCard = () => {
   const [profileUser, setProfileUser] = useState({});
   const { user } = useSelector((state) => state.authReducer.authData);
 
-  const handleLogOut = ()=> {
-    dispatch(logOut())
-  }
+  const handleLogOut = () => {
+    dispatch(logOut());
+  };
 
   useEffect(() => {
     const fetchProfileUser = async () => {
@@ -30,6 +30,7 @@ const InfoCard = () => {
     };
     fetchProfileUser();
   }, [user]);
+
   return (
     <div className="InfoCard">
       <div className="infoHead">
@@ -64,7 +65,7 @@ const InfoCard = () => {
         </span>
         <span> {profileUser.firstname}</span>
       </div>
-      
+
       <div className="info">
         <span>
           <b>Lieu de résidence: </b>
@@ -79,7 +80,9 @@ const InfoCard = () => {
         <span>{profileUser.worksAt}</span>
       </div>
 
-      <button className="button logout-button" onClick={handleLogOut}>Se déconnecter</button>
+      <button className="button logout-button" onClick={handleLogOut}>
+        Se déconnecter
+      </button>
     </div>
   );
 };

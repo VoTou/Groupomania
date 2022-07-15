@@ -21,13 +21,12 @@ export const getUser = async (req, res) => {
 
 // Récupération de tous les utilisateurs
 export const getAllUsers = async (req, res) => {
-
   try {
     let users = await UserModel.find();
-    users = users.map((user)=>{
-      const {password, ...otherDetails} = user._doc
-      return otherDetails
-    })
+    users = users.map((user) => {
+      const { password, ...otherDetails } = user._doc;
+      return otherDetails;
+    });
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error);
@@ -53,14 +52,16 @@ export const updateUser = async (req, res) => {
       const token = jwt.sign(
         { username: user.username, id: user._id },
         process.env.JWT_KEY,
-        { expiresIn: "1h" }
+        { expiresIn: "48h" }
       );
-      res.status(200).json({user, token});
+      res.status(200).json({ user, token });
     } catch (error) {
       res.status(500).json(error);
     }
   } else {
-    res.status(403).json("Access Denied ! You can only update your own profile");
+    res
+      .status(403)
+      .json("Access Denied ! You can only update your own profile");
   }
 };
 
@@ -78,7 +79,9 @@ export const deleteUser = async (req, res) => {
       res.status(500).json(error);
     }
   else {
-    res.status(403).json("Access Denied ! You can only delete your own profile");
+    res
+      .status(403)
+      .json("Access Denied ! You can only delete your own profile");
   }
 };
 
@@ -96,7 +99,7 @@ export const followUser = async (req, res) => {
       if (!followUser.followers.includes(_id)) {
         await followUser.updateOne({ $push: { followers: _id } });
         await followingUser.updateOne({ $push: { followings: id } });
-        res.status(200).json({user: req.user});
+        res.status(200).json({ user: req.user });
       } else {
         res.status(403).json("User is already followed by you");
       }
@@ -114,21 +117,18 @@ export const unfollowUser = async (req, res) => {
     res.status(403).json("Action forbidden");
   } else {
     try {
-      const unFollowUser = await UserModel.findById(id)
-      const unFollowingUser = await UserModel.findById(_id)
+      const unFollowUser = await UserModel.findById(id);
+      const unFollowingUser = await UserModel.findById(_id);
 
-
-      if (unFollowUser.followers.includes(_id))
-      {
-        await unFollowUser.updateOne({$pull : {followers: _id}})
-        await unFollowingUser.updateOne({$pull : {followings: id}})
-        res.status(200).json("Unfollowed Successfully!")
-      }
-      else{
-        res.status(403).json("You are not following this User")
+      if (unFollowUser.followers.includes(_id)) {
+        await unFollowUser.updateOne({ $pull: { followers: _id } });
+        await unFollowingUser.updateOne({ $pull: { followings: id } });
+        res.status(200).json("Unfollowed Successfully!");
+      } else {
+        res.status(403).json("You are not following this User");
       }
     } catch (error) {
-      res.status(500).json(error)
+      res.status(500).json(error);
     }
   }
 };

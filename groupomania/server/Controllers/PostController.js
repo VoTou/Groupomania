@@ -44,20 +44,14 @@ export const updatePost = async (req, res) => {
 
 // Supprimer un post
 export const deletePost = async (req, res) => {
-  const id = req.params.id;
-  const { userId } = req.auth;
+  const { id } = req.params;
 
-  try {
-    const post = await PostModel.findById(id);
-    if (post.userId === userId) {
-      await post.deleteOne();
-      res.status(200).json("Post deleted succesfully !");
-    } else {
-      res.status(403).json("Action forbidden !");
-    }
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send(`No post with id: ${id}`);
+
+  await PostModel.findByIdAndRemove(id);
+
+  res.json({ message: "Post deleted successfully." });
 };
 
 // Aimer/ne plus aimer un post

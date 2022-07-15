@@ -12,9 +12,6 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-// Requêtes obtention de posts - like/dislike d'un post
 export const getTimelinePosts = (id) => API.get(`post/${id}/timeline`);
 export const likePost = (id, userId) =>
   API.put(`post/${id}/like`, { userId: userId });
-
- 
