@@ -3,7 +3,7 @@
 ## MERN Stack
 ### React / Express / MongoDB / Redux
 
-
+Commencer par cloner mon dépôt Github
 
 Démarrer le server : `cd server` + `npm install` + `npm start`
 
