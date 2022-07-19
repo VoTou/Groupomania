@@ -71,7 +71,7 @@ const PostShare = () => {
             Photo
           </div>
           <button className="button ps-button" onClick={handleSubmit}>
-            Partage
+            Partager
           </button>
           <div style={{ display: "none" }}>
             <input
