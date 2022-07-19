@@ -36,7 +36,7 @@ export const getAllUsers = async (req, res) => {
 // Mise à jour de l'utilisateur
 export const updateUser = async (req, res) => {
   const id = req.params.id;
-  const { _id, currentUserAdminStatus, password } = req.body;
+  const { _id, password } = req.body;
 
   if (id === _id) {
     try {
@@ -69,9 +69,9 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   const id = req.params.id;
 
-  const { currentUserId, currentUserAdminStatus } = req.body;
+  const { currentUserId } = req.body;
 
-  if (currentUserId === id || currentUserAdminStatus)
+  if (currentUserId === id)
     try {
       await UserModel.findByIdAndDelete(id);
       res.status(200).json("User deleted successfully");
