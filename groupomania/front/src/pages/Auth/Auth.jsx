@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "./Auth.css";
 import Logo from "../../img/logo.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logIn, signUp } from "../../actions/AuthAction";
 
 const Auth = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.authReducer.loading);
   const [isSignUp, setIsSignUp] = useState(true);
   const [data, setData] = useState({
     username: "",
@@ -38,14 +37,14 @@ const Auth = () => {
   };
   return (
     <div className="Auth">
-      {/* Left Side */}
+      {/* Côté gauche */}
       <div className="a-left">
         <div className="Webname">
           <img src={Logo} alt="" />
           <h6>Travaillez plus efficacement, ensemble !</h6>
         </div>
       </div>
-      {/* Right Side */}
+      {/* Côté droit */}
       <div className="a-right">
         <form className="infoForm authForm" onSubmit={handleSubmit}>
           <h3>{isSignUp ? "Inscription" : "Connexion"}</h3>
@@ -123,9 +122,8 @@ const Auth = () => {
           <button
             className="button infoButton"
             type="submit"
-            disabled={loading}
           >
-            {loading ? "Loading..." : isSignUp ? "Inscription" : "Connexion"}
+            {isSignUp ? "Inscription" : "Connexion"}
           </button>
         </form>
       </div>
