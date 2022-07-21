@@ -35,6 +35,9 @@ export const updatePost = (_id, desc, userId) => {
       method: "put",
       url: `${process.env.REACT_APP_API_URL}post/${_id}`,
       data: { desc, userId },
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`,
+      },
     })
       .then((res) => {
         dispatch({ type: UPDATE_POST, data: { desc, _id } });
