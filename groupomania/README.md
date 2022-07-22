@@ -3,7 +3,7 @@
 ## MERN Stack
 ### React / Express / MongoDB / Redux
 
-Logiciel prérequis : node.js, mongoDB Compass pour visualiser la bdd
+Prérequis : node.js, mongoDB Compass pour visualiser la bdd
 
 Commencer par cloner mon dépôt Github
 
