@@ -3,6 +3,8 @@
 ## MERN Stack
 ### React / Express / MongoDB / Redux
 
+Prérequis : node.js, mongoDB Compass pour visualiser la bdd
+
 Commencer par cloner mon dépôt Github
 
 Démarrer le server : `cd server` + `npm install` + `npm start`
@@ -13,12 +15,11 @@ _____________________________
 
 ### Back config :
 
-* Mettez vos informations de cluster dans `/config/db.js`
-* Créez le fichier `.env` dans `/config/` dans les données suivantes
-   - PORT=5000 `votre port localhost`
-   - CLIENT_URL=http://localhost:3000 `votre URL client`
-   - DB_USER_PASS=fs:fromscratch `votre identifiant et mot de passe`
-   - TOKEN_SECRET=990bf68e6adf1be5f1671bba3bec692056922454 `votre clé secrète aléatoire`
+* Créez le fichier `.env` dans `/server/` dans les données suivantes
+   - PORT=5000 `port localhost`
+   - CLIENT_URL=http://localhost:3000 `URL client`
+   - MONGO_DB= `lien de la base de données à récupérer dans le livrable: Noirbenne_Valentin_1_bdd_062022 `
+   - TOKEN_SECRET=4pzsernmN96CCrz3WdfN1UnJ8 `clé secrète aléatoire`
 _________________________
   
 ### Front config : 
