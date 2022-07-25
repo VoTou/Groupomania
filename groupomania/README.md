@@ -17,9 +17,8 @@ _____________________________
 
 * Créez le fichier `.env` dans `/server/` dans les données suivantes
    - PORT=5000 `port localhost`
-   - CLIENT_URL=http://localhost:3000 `URL client`
    - MONGO_DB= `lien de la base de données à récupérer dans le livrable: Noirbenne_Valentin_1_bdd_062022 `
-   - TOKEN_SECRET=4pzsernmN96CCrz3WdfN1UnJ8 `clé secrète aléatoire`
+   - JWT_KEY=4pzsernmN96CCrz3WdfN1UnJ8 `clé secrète aléatoire`
 _________________________
   
 ### Front config : 
