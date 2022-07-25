@@ -28,9 +28,10 @@ export const getPost = async (req, res) => {
 export const updatePost = async (req, res) => {
   const postId = req.params.id;
   const { userId } = req.body;
+  const user = await UserModel.findOne({ isAdmin: true })
   try {
     const post = await PostModel.findById(postId);
-    if (post.userId === userId) {
+    if (post.userId === userId || user.isAdmin) {
       await post.updateOne({ $set: req.body });
       res.status(200).json("Post Updated !");
     } else {
